@@ -4,6 +4,7 @@ export type VagaProps = {
     description: String;
     date: String;
     phone: String;
+    status: String;
     company: String;
 };
 

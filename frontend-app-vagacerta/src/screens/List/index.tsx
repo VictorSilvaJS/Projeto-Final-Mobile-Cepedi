@@ -30,8 +30,6 @@ export default function List() {
   }, []);
 
 
-  
-
   return (
     <Wrapper>
       <Image source={BGTop} style={{ maxHeight: 86 }} />
@@ -59,10 +57,10 @@ export default function List() {
               ListEmptyComponent={() => (
                 <View>
                   <Text>
-                    Você ainda não tem tarefas cadastradas
+                    Você ainda não tem vagas cadastradas
                   </Text>
                   <Text>
-                    Crie tarefas e organize seus itens a fazer.
+                    Crie vagas e organize seus itens a fazer.
                   </Text>
                 </View>
               )}

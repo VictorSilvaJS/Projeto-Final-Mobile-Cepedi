@@ -15,22 +15,29 @@ import Input from '../../components/Input'
 import { Button } from '../../components/Button';
 
 import api from '../../services/api'
-import userRepository from '../../../../backend-app-vagacerta/repositories/usuarioRepository'
-
 
 export default function Profile({ navigation }) {
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
 
+
     const handleProfile = async () => {
-        const response = await api.get('api/usuarios/: id')
-        const user = response.data
-        if(user) {
-            setNome(user.nome)
-            setEmail(user.email)
-            setSenha(user.senha)
-            userRepository.update(user.id, {nome, email, senha})
+        try {
+            const response = await api.get('api/usuarios/: id')
+            const user = response.data
+            if (user) {
+                setNome(user.nome)
+                setEmail(user.email)
+                setSenha(user.senha)
+                api.put(`http://localhost:3000/api/usuarios/${id}`,{
+                    nome,
+                    email,
+                    senha
+                })
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -56,12 +63,12 @@ export default function Profile({ navigation }) {
                         onChangeText={setNome}
                     />
                     <Input label='E-mail'
-                        placeholder='digite seu e-mail' 
+                        placeholder='digite seu e-mail'
                         value={email}
-                        onChangeText={setEmail}    
+                        onChangeText={setEmail}
                     />
                     <Input label='Senha'
-                        placeholder='digite sua senha' 
+                        placeholder='digite sua senha'
                         value={senha}
                         onChangeText={setSenha}
                     />

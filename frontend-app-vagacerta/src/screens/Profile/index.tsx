@@ -17,6 +17,7 @@ import { Button } from '../../components/Button';
 import api from '../../services/api'
 
 export default function Profile({ navigation }) {
+    const [id, setId] = useState('')
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
@@ -24,9 +25,10 @@ export default function Profile({ navigation }) {
 
     const handleProfile = async () => {
         try {
-            const response = await api.get('api/usuarios/: id')
+            const response = await api.get('api/usuarios/:id')
             const user = response.data
             if (user) {
+                setId(user.id)
                 setNome(user.nome)
                 setEmail(user.email)
                 setSenha(user.senha)

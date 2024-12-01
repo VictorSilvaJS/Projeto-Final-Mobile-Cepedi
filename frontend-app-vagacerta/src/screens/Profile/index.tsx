@@ -27,28 +27,26 @@ export default function Profile({ navigation }) {
     const [senha, setSenha] = useState('')
     const [id, setId] = useState('')
     const { user, logout } = useAuth()
-    
+
     useEffect(() => {
         if(user) {
             setNome(user.nome)
             setEmail(user.email)
             setSenha(user.senha)
+            setId(user.id)
         }
     }, [user]);
 
     const handleProfile = async () => {
-        setId(user.id)
         try {
-            setNome(nome)
-            setEmail(email)
-            setSenha(senha)
-            api.put(`api/usuarios/${id}`, {
+            await api.put(`api/usuarios/${user.id}`, {
                 nome,
                 email,
                 senha
             })
+            Alert.alert('Sucesso', 'Usuário atualizado com sucesso')
         } catch (error) {
-            Alert.alert('Error: Usuario não pode ser alterado', error)
+            Alert.alert('Error: Usuario não pode ser alterado', error.message)
         }
     }
 
@@ -74,16 +72,19 @@ export default function Profile({ navigation }) {
             <Container>
                 <ContentContainer>
                     <Input label='Nome'
-                        placeholder={user.nome}
-                        onChangeText={setNome}
-                    />
+                        placeholder='digite seu nome'
+                        value={nome}
+                        onChangeText={text => setNome(text)}
+                        />
                     <Input label='E-mail'
-                        placeholder={user.email}
-                        onChangeText={setEmail}
-                    />
+                        placeholder='digite seu e-mail'
+                        value={email}
+                        onChangeText={text => setEmail(text)}
+                        />
                     <Input label='Senha'
-                        placeholder={user.senha}
-                        onChangeText={setSenha}
+                        placeholder='digite sua senha'
+                        value={senha}
+                        onChangeText={text => setSenha(text)}
                     />
                 </ContentContainer>
 

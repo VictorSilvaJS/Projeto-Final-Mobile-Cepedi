@@ -13,9 +13,28 @@ import Logo from '../../components/Logo';
 import theme from '../../theme';
 import Input from '../../components/Input'
 import { Button } from '../../components/Button';
-
+import { Alert } from 'react-native';
 
 export default function Profile({navigation }) {
+
+    const handleLogout = () => {
+        Alert.alert(
+            'Confirmar Logout',
+            'Deseja realmente sair?',
+            [
+                { text: 'Cancelar', style: 'cancel' },
+                {
+                    text: 'Sair',
+                    onPress: () => {
+                        navigation.reset({
+                            index: 0,
+                            routes: [{ name: 'Login' }],
+                        });
+                    },
+                },
+            ]
+        );
+    };
 
     return (
         <Wrapper>
@@ -43,6 +62,13 @@ export default function Profile({navigation }) {
                     noSpacing={true} 
                     variant='primary'
                     />
+
+                <Button 
+                    title="Sair da conta" 
+                    noSpacing={true} 
+                    variant="secondary"
+                    onPress={handleLogout} 
+                />
             </Container>
         </Wrapper>
     );

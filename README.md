@@ -27,7 +27,6 @@ O **VagaCerta** é uma aplicação Mobile desenvolvida como parte da Unidade 10 
 - **Gerenciamento de Vagas de Emprego**: Criação e controle detalhado de vagas.
 - **Filtragem de Vagas**: Busca avançada por status (aberta/fechada).
 - **Autenticação de Usuários**: Controle de acesso seguro com autenticação.
-- **Persistência de Dados**: Armazenamento local utilizando SQLite.
 - **Integração Backend-Frontend**: Comunicação eficiente e confiável entre cliente e servidor.
 
 ---

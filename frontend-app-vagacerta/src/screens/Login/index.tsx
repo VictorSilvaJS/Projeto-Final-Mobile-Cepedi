@@ -1,4 +1,4 @@
-import { Image } from 'react-native'
+import { Image, Alert } from 'react-native'
 import { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Wrapper, Container, Form, TextContainer, TextBlack, TextLink, TextLinkContainer } from './styles';
@@ -33,6 +33,7 @@ export default function Login({ navigation }) {
         // Navegue para a próxima tela ou faça outras ações necessárias
         // navigation.navigate('NextScreen');
       } else {
+        Alert.alert('Erro', 'Email ou senha incorreto.');
         console.log('Login failed', 'Email or password is incorrect');
       }
     } catch (error) {

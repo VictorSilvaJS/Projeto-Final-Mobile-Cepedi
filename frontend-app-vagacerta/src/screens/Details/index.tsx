@@ -32,7 +32,7 @@ export default function Details({ route, navigation }) {
         try {
             const response = await api.get(`api/vagas/${id}`);
             console.log("Details ID: ", {id})
-            const data = response.data.jobs;
+            const data = response.data.job;
             console.log("Details vagas: ", {data})
             setId(data.id)
             if(data) {
@@ -48,7 +48,7 @@ export default function Details({ route, navigation }) {
             }
             console.log("Details vagas: ", vaga)
         } catch (error) {
-            console.error(error);
+            // console.error(error);
         }
     };
 
@@ -95,7 +95,7 @@ export default function Details({ route, navigation }) {
                 ) : (
                     <TitleError>Vaga não encontrada!</TitleError>
                 )}
-                {(vaga.status === 'aberta') && (
+                {vaga && vaga.status === 'aberta' && (
                     <Button
                         title="Entrar em contato"
                         noSpacing={true}

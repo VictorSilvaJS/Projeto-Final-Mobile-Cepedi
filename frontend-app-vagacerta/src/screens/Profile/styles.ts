@@ -44,5 +44,12 @@ export const ContentContainer = styled.View`
   gap: 16px;
 `;
 
+export const LogoutButtonContainer = styled.View`
+  margin-top: auto;
+  width: 100%;
+  align-items: center;
+  padding: 16px;
+`;
+
 
 

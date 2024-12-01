@@ -1,5 +1,6 @@
 import { Image } from 'react-native'
 import { useState } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Wrapper, Container, Form, TextContainer, TextBlack, TextLink, TextLinkContainer } from './styles';
 import { useAuth } from '../../contexts/Auth';
 
@@ -20,9 +21,13 @@ export default function Login({ navigation }) {
     try {
       const response = await api.get('api/usuarios')
       const users = response.data.usuarios;
+      console.log(users)
+
       const user = users.find(u => u.email === email && u.senha === senha);
       if (user) {
         console.log('Login successful', `Welcome, ${user.nome}!`)
+        const jsonValue = JSON.stringify(user);
+        await AsyncStorage.setItem('user', jsonValue);
         login(user)
         navigation.navigate('Auth', { screen: 'Home' })
         // Navegue para a próxima tela ou faça outras ações necessárias
@@ -32,8 +37,8 @@ export default function Login({ navigation }) {
       }
     } catch (error) {
       console.log('Login failed', 'An error occurred during login');
-      console.error('Error Status: ',error.status)
-      console.error('Error message: ',error.message)   
+      console.error('Error Status: ', error.status)
+      console.error('Error message: ', error.message)
     }
   };
 
@@ -53,7 +58,8 @@ export default function Login({ navigation }) {
             label='Senha'
             placeholder='digite sua senha'
             value={senha}
-            onChangeText={setSenha} />
+            onChangeText={setSenha}
+            secureTextEntry={true} />
           <Button
             title="Entrar"
             noSpacing={true}

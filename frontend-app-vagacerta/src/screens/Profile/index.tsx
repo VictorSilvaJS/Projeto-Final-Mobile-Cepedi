@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Feather } from '@expo/vector-icons';
 import {
     Wrapper,
@@ -8,6 +9,7 @@ import {
     ButtonIcon,
     ButtonText,
     ContentContainer,
+    LogoutButtonContainer,
 } from '../Profile/styles';
 import Logo from '../../components/Logo';
 import theme from '../../theme';
@@ -20,11 +22,19 @@ import { useAuth } from '../../contexts/Auth';
 
 
 export default function Profile({ navigation }) {
-    const [id, setId] = useState('')
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
+    const [id, setId] = useState('')
     const { user, logout } = useAuth()
+    
+    useEffect(() => {
+        if(user) {
+            setNome(user.nome)
+            setEmail(user.email)
+            setSenha(user.senha)
+        }
+    }, [user]);
 
     const handleProfile = async () => {
         setId(user.id)
@@ -39,10 +49,13 @@ export default function Profile({ navigation }) {
             })
         } catch (error) {
             Alert.alert('Error: Usuario não pode ser alterado', error)
-            logout()
-            navigation.replace('Login')
         }
     }
+
+    const handleLogout = () => {
+        logout();
+        navigation.replace('Login');
+    };
 
     return (
         <Wrapper>
@@ -61,18 +74,15 @@ export default function Profile({ navigation }) {
             <Container>
                 <ContentContainer>
                     <Input label='Nome'
-                        placeholder='digite seu nome'
-                        value={nome}
+                        placeholder={user.nome}
                         onChangeText={setNome}
                     />
                     <Input label='E-mail'
-                        placeholder='digite seu e-mail'
-                        value={email}
+                        placeholder={user.email}
                         onChangeText={setEmail}
                     />
                     <Input label='Senha'
-                        placeholder='digite sua senha'
-                        value={senha}
+                        placeholder={user.senha}
                         onChangeText={setSenha}
                     />
                 </ContentContainer>
@@ -83,6 +93,15 @@ export default function Profile({ navigation }) {
                     variant='primary'
                     onPress={handleProfile}
                 />
+
+                <LogoutButtonContainer>
+                    <Button
+                        title="Logout"
+                        noSpacing={true}
+                        variant='secondary'
+                        onPress={handleLogout}
+                    />
+                </LogoutButtonContainer>
             </Container>
         </Wrapper>
     );

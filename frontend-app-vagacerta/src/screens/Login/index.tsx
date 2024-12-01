@@ -18,7 +18,7 @@ export default function Login({ navigation }) {
 
   const handleLogin = async () => {
     try {
-      const response = await api.get('/api/usuarios')
+      const response = await api.get('api/usuarios')
       const users = response.data.usuarios;
       const user = users.find(u => u.email === email && u.senha === senha);
       if (user) {
@@ -32,7 +32,8 @@ export default function Login({ navigation }) {
       }
     } catch (error) {
       console.log('Login failed', 'An error occurred during login');
-      console.error('Error Status: ',error.status)      
+      console.error('Error Status: ',error.status)
+      console.error('Error message: ',error.message)   
     }
   };
 

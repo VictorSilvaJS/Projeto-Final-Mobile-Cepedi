@@ -18,14 +18,13 @@ export default function List() {
     const fetchVagas = async () => {
       try {
         const response = await api.get('api/vagas');
-        setVagas(response.data);
+        setVagas(response.data.jobs);
       } catch (error) {
         console.error(error);
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchVagas();
   }, []);
 

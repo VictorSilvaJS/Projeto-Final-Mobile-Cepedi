@@ -29,17 +29,19 @@ export default function Profile({ navigation }) {
         try {
             const response = await api.get('api/usuarios/:id')
             const us = response.data
-
+            console.log(us.email)
             if (us.id === user.id) {
                 setId(us.id)
                 setNome(us.nome)
                 setEmail(us.email)
                 setSenha(us.senha)
-                api.put(`http://localhost:3000/api/usuarios/${id}`, {
+                console.log('busca endereço')
+                api.put(`api/usuarios/${id}`, {
                     nome,
                     email,
                     senha
                 })
+                console.log('traz endereço')
             } else {
                 Alert.alert('Usuario não autorizado')
                 logout()

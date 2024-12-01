@@ -64,4 +64,8 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.post('/logout', async (req, res) => {  
+  res.status(200).json({ message: 'Logout realizado com sucesso' });
+});
+
 module.exports = router;

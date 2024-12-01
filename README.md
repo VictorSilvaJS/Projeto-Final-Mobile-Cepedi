@@ -57,7 +57,6 @@ O **VagaCerta** é uma aplicação Mobile desenvolvida como parte da Unidade 10 
 #### 1. Clone o Repositório
 ```bash
 git clone https://github.com/VictorSilvaJS/Projeto-Final-Mobile-Cepedi.git
-cd VagaCerta
 ```
 
 #### 2. Configuração do Backend

@@ -44,13 +44,13 @@ export default function List() {
           ) : (
             <FlatList
               data={vagas}
-              keyExtractor={(item) => item.id.toString()}
+              keyExtractor={(item) => item.id.toString() }
               renderItem={({ item }) =>
                 <VagaCard
-              id={item.id}
-              title={item.titulo}
-              dataCreated={item.dataCadastro}
-              company={item.empresa}
+                  id={item.id}
+                  title={item.titulo}
+                  dataCreated={item.dataCadastro}
+                  company={item.empresa}
                 />
               }
               showsVerticalScrollIndicator={true}

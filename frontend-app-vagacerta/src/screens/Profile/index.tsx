@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import {
     Wrapper,
@@ -14,29 +14,36 @@ import theme from '../../theme';
 import Input from '../../components/Input'
 import { Button } from '../../components/Button';
 
+import { useAuth } from '../../contexts/Auth';
 import api from '../../services/api'
+import { Alert } from 'react-native';
 
 export default function Profile({ navigation }) {
     const [id, setId] = useState('')
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
-
+    const { user, logout } = useAuth()
 
     const handleProfile = async () => {
         try {
             const response = await api.get('api/usuarios/:id')
-            const user = response.data
-            if (user) {
-                setId(user.id)
-                setNome(user.nome)
-                setEmail(user.email)
-                setSenha(user.senha)
-                api.put(`http://localhost:3000/api/usuarios/${id}`,{
+            const us = response.data
+
+            if (us.id === user.id) {
+                setId(us.id)
+                setNome(us.nome)
+                setEmail(us.email)
+                setSenha(us.senha)
+                api.put(`http://localhost:3000/api/usuarios/${id}`, {
                     nome,
                     email,
                     senha
                 })
+            } else {
+                Alert.alert('Usuario não autorizado')
+                logout()
+                navigation.replace('Login')
             }
         } catch (error) {
             console.log(error)

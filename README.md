@@ -33,8 +33,8 @@ O **VagaCerta** é uma aplicação Mobile desenvolvida como parte da Unidade 10 
 ---
 
 ## Estrutura do Projeto
-- **backend/**: Contém o código, modelos e configurações da API.
-- **frontend/**: Contém o código da aplicação React Native.
+- **backend-app-vagacerta**: Contém o código, modelos e configurações da API.
+- **frontend-app-vagacerta**: Contém o código da aplicação React Native.
 
 ---
 

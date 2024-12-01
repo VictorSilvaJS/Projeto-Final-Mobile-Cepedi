@@ -18,19 +18,16 @@ export default function List() {
     const fetchVagas = async () => {
       try {
         const response = await api.get('api/vagas');
-        setVagas(response.data);
+        setVagas(response.data.jobs);
       } catch (error) {
         console.error(error);
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchVagas();
   }, []);
 
-
-  
 
   return (
     <Wrapper>
@@ -46,23 +43,23 @@ export default function List() {
           ) : (
             <FlatList
               data={vagas}
-              keyExtractor={(item) => item.id.toString()}
+              keyExtractor={(item) => item.id.toString() }
               renderItem={({ item }) =>
                 <VagaCard
-              id={item.id}
-              title={item.titulo}
-              dataCreated={item.dataCadastro}
-              company={item.empresa}
+                  id={item.id}
+                  title={item.titulo}
+                  dataCreated={item.dataCadastro}
+                  company={item.empresa}
                 />
               }
               showsVerticalScrollIndicator={true}
               ListEmptyComponent={() => (
                 <View>
                   <Text>
-                    Você ainda não tem tarefas cadastradas
+                    Você ainda não tem vagas cadastradas
                   </Text>
                   <Text>
-                    Crie tarefas e organize seus itens a fazer.
+                    Crie vagas e organize seus itens a fazer.
                   </Text>
                 </View>
               )}

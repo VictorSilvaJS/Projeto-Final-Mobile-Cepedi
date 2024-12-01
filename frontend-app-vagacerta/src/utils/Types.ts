@@ -4,8 +4,16 @@ export type VagaProps = {
     description: String;
     date: String;
     phone: String;
+    status: String;
     company: String;
 };
+
+export type UserProps = {
+    id: number;
+    nome: String;
+    email: String;
+    senha: String;
+}
 
 export type RootStackParamList = {
     Login: undefined;

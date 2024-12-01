@@ -50,7 +50,7 @@ function Auth() {
         {() => (
           <HomeStack.Navigator screenOptions={{ headerShown: false }}>
             <HomeStack.Screen name="List" component={List} />
-            <HomeStack.Screen name="Details" component={Details} />
+            <HomeStack.Screen name="Details" component={Details} initialParams={{id: 1}}/>
           </HomeStack.Navigator>
         )}
       </Tab.Screen>

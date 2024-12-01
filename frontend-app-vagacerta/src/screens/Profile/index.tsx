@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import {
     Wrapper,
@@ -14,9 +14,10 @@ import theme from '../../theme';
 import Input from '../../components/Input'
 import { Button } from '../../components/Button';
 
-import { useAuth } from '../../contexts/Auth';
 import api from '../../services/api'
 import { Alert } from 'react-native';
+import { useAuth } from '../../contexts/Auth';
+
 
 export default function Profile({ navigation }) {
     const [id, setId] = useState('')
@@ -26,29 +27,20 @@ export default function Profile({ navigation }) {
     const { user, logout } = useAuth()
 
     const handleProfile = async () => {
+        setId(user.id)
         try {
-            const response = await api.get('api/usuarios/:id')
-            const us = response.data
-            console.log(us.email)
-            if (us.id === user.id) {
-                setId(us.id)
-                setNome(us.nome)
-                setEmail(us.email)
-                setSenha(us.senha)
-                console.log('busca endereço')
-                api.put(`api/usuarios/${id}`, {
-                    nome,
-                    email,
-                    senha
-                })
-                console.log('traz endereço')
-            } else {
-                Alert.alert('Usuario não autorizado')
-                logout()
-                navigation.replace('Login')
-            }
+            setNome(nome)
+            setEmail(email)
+            setSenha(senha)
+            api.put(`api/usuarios/${id}`, {
+                nome,
+                email,
+                senha
+            })
         } catch (error) {
-            console.log(error)
+            Alert.alert('Error: Usuario não pode ser alterado', error)
+            logout()
+            navigation.replace('Login')
         }
     }
 

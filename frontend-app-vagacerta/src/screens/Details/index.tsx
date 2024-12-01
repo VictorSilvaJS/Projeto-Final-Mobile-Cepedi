@@ -12,7 +12,8 @@ import {
     Title,
     Description,
     TitleError
-} from '../Details/styles';
+}
+ from '../Details/styles';
 
 import api from '../../services/api';
 import { VagaProps } from '../../utils/Types';
@@ -24,23 +25,28 @@ import { Button } from '../../components/Button';
 
 export default function Details({ route, navigation }) {
 
-    const [id, setId] = useState(route.params.id);
+    const [id, setId] = useState(route.params.id || 1);
+    console.log(id)
     const [vaga, setVaga] = useState<VagaProps>(null);
-
     const fetchVagas = async () => {
-
         try {
             const response = await api.get(`api/vagas/${id}`);
-            const data = response.data;
-            setVaga({
-                id: data.id,
-                title: data.titulo,
-                description: data.descricao,
-                date: data.dataCadastro,
-                phone: data.telefone,
-                status: data.status,
-                company: data.empresa,
-            });
+            console.log("Details ID: ", {id})
+            const data = response.data.jobs;
+            console.log("Details vagas: ", {data})
+            setId(data.id)
+            if(data) {
+                setVaga({
+                    id: data.id,
+                    title: data.titulo,
+                    description: data.descricao,
+                    date: data.dataCadastro,
+                    phone: data.telefone,
+                    status: data.status,
+                    company: data.empresa,
+                });
+            }
+            console.log("Details vagas: ", vaga)
         } catch (error) {
             console.error(error);
         }

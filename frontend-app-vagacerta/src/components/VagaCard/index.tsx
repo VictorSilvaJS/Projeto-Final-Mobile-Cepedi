@@ -18,9 +18,9 @@ type Props = NativeStackScreenProps<RootStackParamList>;
 
 export default function VagaCard({id, title, dataCreated, company}: Data) {
     const navigation = useNavigation<Props['navigation']>();
-    
+    console.log({id})
     return (
-        <Container onPress={() => navigation.navigate('Details', { id })}>
+        <Container onPress={() => navigation.navigate('Details', {id})}>
             <Content>
                 <Title numberOfLines={1}>{title}</Title>
                 <Data>{dataCreated}</Data>
